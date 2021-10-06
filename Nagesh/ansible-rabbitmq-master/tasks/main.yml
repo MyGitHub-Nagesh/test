@@ -1,0 +1,13 @@
+---
+
+- include: packages_redhat.yml
+  when: ansible_os_family == 'RedHat'
+
+
+- include: configuration.yml
+
+- include: services.yml
+
+- meta: flush_handlers
+
+- include: sanitycheck.yml

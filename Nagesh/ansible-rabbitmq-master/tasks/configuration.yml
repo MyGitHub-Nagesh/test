@@ -1,0 +1,20 @@
+---
+
+- name: Configure RabbitMQ
+  template:
+    dest: '/etc/rabbitmq/rabbitmq.config'
+    group: 'rabbitmq'
+    mode: 0644
+    owner: 'rabbitmq'
+    src: 'rabbitmq.config.j2'
+  notify: Restart RabbitMQ server
+
+- name: RabbitMQ Environment-specific configuration
+  template:
+    dest: '/etc/rabbitmq/rabbitmq-env.conf'
+    group: 'rabbitmq'
+    mode: 0644
+    owner: 'rabbitmq'
+    src: 'rabbitmq-env.conf.j2'
+  notify: Restart RabbitMQ server
+  when: rabbitmq_conf_env is defined
